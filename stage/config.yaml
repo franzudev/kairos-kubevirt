@@ -1,0 +1,42 @@
+#cloud-config
+
+install:
+  no-format: true
+  auto: true
+  device: "/dev/sda"
+  reboot: true
+  poweroff: true
+  image: "docker:<docker-repo>/<docker-image>"
+  system:
+    label: COS_ACTIVE
+    size: 16384
+    fs: ext4
+
+k3s:
+  enabled: true
+
+users:
+  - name: kairos
+    passwd: "kairos"
+    sudo:  ALL=(ALL) NOPASSWD:k3s
+    groups:
+    - ziti
+
+write_files:
+- path: /opt/openziti/etc/identities/token.jwt
+  content: <ziti-token> 
+  encoding: base64
+  permissions: 0777
+  owner: ziti:ziti
+
+stages:
+  network:
+    - name: "Install kubevirt"
+      commands:
+      - |
+        sudo curl -L -o /var/lib/rancher/k3s/server/manifests/kubevirt-operator.vaml https://github.com/kubevirt/kubevirt/releases/download/v0.59.2/kubevirt-operator.yaml
+        sudo curl -L -o /var/lib/rancher/k3s/server/manifests/kubevirt-cr.vaml https://github.com/kubevirt/kubevirt/releases/download/v0.59.2/kubevirt-cr.yaml
+        sudo curl -L -o /var/lib/rancher/k3s/server/manifests/cdi-operator.vaml https://github.com/kubevirt/containerized-data-importer/releases/download/v1.56.0/cdi-operator.yaml
+        sudo curl -L -o /var/lib/rancher/k3s/server/manifests/cdi-cr.vaml https://github.com/kubevirt/containerized-data-importer/releases/download/v1.56.0/cdi-cr.yaml
+        sudo systemctl enable --now ziti-edge-tunnel.service
+
