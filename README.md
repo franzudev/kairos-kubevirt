@@ -16,6 +16,9 @@ docker build -t <DOCKER_REPO>/kairos-custom-image .
 
 docker push <DOCKER_REPO>/kairos-custom-image
 
+# Edit the file stage/config.yaml and replace the occurences of <docker-repo>, <docker-image> and <ziti-token> with the necessary values
+vim config.yaml
+
 docker run -v $PWD/config.yaml:/config.yaml \
   -v $PWD/build:/tmp/auroraboot \
   -v /var/run/docker.sock:/var/run/docker.sock \
