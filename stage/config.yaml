@@ -6,7 +6,7 @@ install:
   device: "/dev/sda"
   reboot: true
   poweroff: true
-  image: "docker:<docker-repo>/<docker-image>"
+  image: "docker:franzu/byoi-kubevirt-counter"
   system:
     label: COS_ACTIVE
     size: 16384
@@ -22,12 +22,12 @@ users:
     groups:
     - ziti
 
-write_files:
-- path: /opt/openziti/etc/identities/token.jwt
-  content: <ziti-token> 
-  encoding: base64
-  permissions: 0777
-  owner: ziti:ziti
+#write_files:
+#- path: /opt/openziti/etc/identities/token.jwt
+#  content: <ziti-token>
+#  encoding: base64
+#  permissions: 0777
+#  owner: ziti:ziti
 
 stages:
   network:
@@ -38,5 +38,5 @@ stages:
         sudo curl -L -o /var/lib/rancher/k3s/server/manifests/kubevirt-cr.vaml https://github.com/kubevirt/kubevirt/releases/download/v0.59.2/kubevirt-cr.yaml
         sudo curl -L -o /var/lib/rancher/k3s/server/manifests/cdi-operator.vaml https://github.com/kubevirt/containerized-data-importer/releases/download/v1.56.0/cdi-operator.yaml
         sudo curl -L -o /var/lib/rancher/k3s/server/manifests/cdi-cr.vaml https://github.com/kubevirt/containerized-data-importer/releases/download/v1.56.0/cdi-cr.yaml
-        sudo systemctl enable --now ziti-edge-tunnel.service
+#        sudo systemctl enable --now ziti-edge-tunnel.service
 
