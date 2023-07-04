@@ -148,6 +148,6 @@ do_gitlab_release:
   script:
     - > 
       release-cli create --name ${GitVersion_LegacySemVer} --description $CI_COMMIT_REF_NAME-$CI_JOB_ID
-      --tag-name ${GitVersion_LegacySemVer} --ref $CI_COMMIT_SHA
+      --tag-name 0.1.1 --ref $CI_COMMIT_SHA
       --assets-link "{\"name\":\"maindo-kairos.iso\",\"url\":\"https://gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/-/jobs/$JOB_ID/artifacts/download\"}"
   
