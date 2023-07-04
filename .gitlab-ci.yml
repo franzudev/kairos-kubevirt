@@ -151,7 +151,7 @@ do_gitlab_release:
     name: 'Release $TAG'
     description: 'Created using the release-cli $EXTRA_DESCRIPTION'
     ref: '$CI_COMMIT_SHA'
-    tag_name: "${GitVersion_LegacySemVer}"
+    tag_name: "$CI_COMMIT_TAG"
     assets:
       links:
         - name: "maindo-kairos.iso"
