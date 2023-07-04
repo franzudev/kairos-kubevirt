@@ -130,7 +130,10 @@ create_kairos_iso:
     - echo "JOB_ID=$CI_JOB_ID" >> job.env
   artifacts:
     paths:
-      - 'build/iso/*.custom.iso'
+      - 'build/iso/kairos.iso.custom.iso'
+    expire_in: never
+    reports:
+      dotenv: job.env
 
 # Please see [Release CI/CD examples](https://docs.gitlab.com/ee/user/project/releases/release_cicd_examples.html) for many rich examples for triggering a release only on specific conditions.
 do_gitlab_release:
