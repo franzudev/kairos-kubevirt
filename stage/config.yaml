@@ -6,7 +6,7 @@ install:
   device: "/dev/sda"
   reboot: true
   poweroff: true
-  image: "docker:franzu/byoi-kubevirt-counter"
+  image: "docker:registry.gitlab.com/ffrancois/kairos-ci:latest"
   system:
     label: COS_ACTIVE
     size: 16384
