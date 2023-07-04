@@ -124,9 +124,9 @@ create_kairos_iso:
         --cloud-config /config.yaml \
         --set "state_dir=/tmp/auroraboot" \
         --set "flavor=ubuntu-20-lts"
-        artifacts:
-          paths:
-            - 'build/iso/*.custom.iso'
+  artifacts:
+    paths:
+      - 'build/iso/*.custom.iso'
 
 # Please see [Release CI/CD examples](https://docs.gitlab.com/ee/user/project/releases/release_cicd_examples.html) for many rich examples for triggering a release only on specific conditions.
 do_gitlab_release:
