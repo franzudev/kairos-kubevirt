@@ -148,9 +148,10 @@ do_gitlab_release:
   script:
     - echo "Running the release job."
   release:
-    tag_name: 'Release $TAG'
+    name: 'Release $TAG'
     description: 'Created using the release-cli $EXTRA_DESCRIPTION'
     ref: '$CI_COMMIT_SHA'
+    tag_name: "${GitVersion_LegacySemVer}"
     assets:
       links:
         - name: "maindo-kairos.iso"
