@@ -113,7 +113,7 @@ create_kairos_iso:
       docker run -v $PWD/config.yaml:/config.yaml \
         -v $PWD/build:/tmp/auroraboot \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        --rm -ti quay.io/kairos/auroraboot \
+        --rm quay.io/kairos/auroraboot \
         --set "artifact_version=v2.2.1" \
         --set "release_version=v2.2.1" \
         --set "disable_http_server=true" \
