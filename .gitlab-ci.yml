@@ -146,7 +146,9 @@ do_gitlab_release:
     - job: create_kairos_iso
       artifacts: true
   script:
-    - > 
+    - >
+      echo ${GitVersion_LegacySemVer} - $CI_COMMIT_REF_NAME-$CI_JOB_ID - ${GitVersion_LegacySemVer} - $CI_COMMIT_SHA - $CI_PROJECT_NAMESPACE - $CI_PROJECT_NAME - $JOB_ID
+
       release-cli create --name ${GitVersion_LegacySemVer} --description $CI_COMMIT_REF_NAME-$CI_JOB_ID
       --tag-name ${GitVersion_LegacySemVer} --ref $CI_COMMIT_SHA
       --assets-link "{\"name\":\"Kairos\",\"url\":\"https://gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/-/jobs/$JOB_ID/artifacts/raw/build/iso/kairos.iso.custom.iso\"}"
