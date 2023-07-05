@@ -142,11 +142,11 @@ do_gitlab_release:
   rules:
     - if: '$CI_COMMIT_BRANCH && $CI_COMMIT_REF_PROTECTED != "false"'
       #This last rule will do a release for any protected branch. Literal branch names can be used if desired.
-
+  needs:
+    - job: create_kairos_iso
+      artifacts: true
   script:
     - > 
       release-cli create --name ${GitVersion_LegacySemVer} --description $CI_COMMIT_REF_NAME-$CI_JOB_ID
       --tag-name ${GitVersion_LegacySemVer} --ref $CI_COMMIT_SHA
-      --assets-link "{\"name\":\"Packaged Artifact\",\"url\":\"${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGENAME}/${GitVersion_LegacySemVer}/${PACKAGENAME}.${GitVersion_LegacySemVer}.tar.gz\"}"
-
-  
+      --assets-link "{\"name\":\"Kairos\",\"url\":\"https://gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/-/jobs/$JOB_ID/artifacts/raw/build/iso/kairos.iso.custom.iso\"}"
